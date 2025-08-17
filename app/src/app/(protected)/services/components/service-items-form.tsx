@@ -127,7 +127,7 @@ export const ServiceItemsForm: React.FC<ServiceItemsFormProps> = ({
                             initialValue={defaultActivity}
                             onChange={(option) => {
                               field.onChange(option?.value || null);
-                              handleFetchActivity(option?.value, index);
+                              handleFetchActivity(option?.value || null, index);
                             }}
                           />
                         )}

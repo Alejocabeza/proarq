@@ -14,7 +14,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.refreshToken = user.refresh_token;
         token.expiresIn = user.expires_in;
       }
-      const isExpired = token.expiresIn && Date.now() > token.expiresIn * 1000;
+      const isExpired = (token.expiresIn as number) && Date.now() > (token.expiresIn as number) * 1000;
       if (isExpired) {
         return null;
       }
@@ -22,6 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       if (token) return { ...session, ...token };
+      return session;
     },
   },
 });

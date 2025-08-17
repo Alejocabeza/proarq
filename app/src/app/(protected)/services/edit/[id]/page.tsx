@@ -74,11 +74,11 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (!isLoading) {
+    if (data) {
       setValue("unit", data.unit);
       setValue(
         "serviceCategory",
-        data.serviceCategory ? data.serviceCategory.id : null,
+        data.serviceCategory ? data.serviceCategory.id : null
       );
       setValue(
         "items",
@@ -87,10 +87,10 @@ const Page = () => {
           activity: item?.activity?.id,
           unitedPrice: item?.unitedPrice || 0,
           percentage: item?.percentage || 0,
-        })),
+        }))
       );
     }
-  }, [isLoading]);
+  }, [data, setValue]);
 
   return (
     <>
@@ -146,7 +146,9 @@ const Page = () => {
                       { value: UnitEnum.GBL, label: UnitEnum.GBL },
                       { value: UnitEnum.UND, label: UnitEnum.UND },
                     ]}
-                    onChange={(option) => field.onChange(option.value || null)}
+                    onChange={(option) =>
+                      field.onChange(option ? option.value : null)
+                    }
                   />
                 )}
               />
@@ -185,7 +187,9 @@ const Page = () => {
                     id="serviceCategory"
                     apiPath="/service_categories"
                     placeholder={t("clients.select_address")}
-                    onChange={(option) => field.onChange(option.value || null)}
+                    onChange={(option) =>
+                      field.onChange(option ? option.value : null)
+                    }
                   />
                 )}
               />

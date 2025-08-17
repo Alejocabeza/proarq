@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import Select, { MultiValue, SingleValue, StylesConfig } from "react-select";
 import { debounce } from "lodash";
 import { useSession } from "next-auth/react";
@@ -21,8 +27,14 @@ interface SelectLoaderProps {
   placeholder?: string;
   dependsOn?: string;
   onChange: (option: Option | null) => void;
-  state?: Record<string, any>;
+  state?: Record<string, unknown>;
 }
+
+type ApiItem = {
+  id: string;
+  name: string;
+  [key: string]: string | number;
+};
 
 export const SelectLoader: React.FC<SelectLoaderProps> = ({
   id,
@@ -43,18 +55,21 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
   const [isDisabled, setIsDisabled] = useState(disabled);
   const [allData, setAllData] = useState<Option[]>(options || []);
   const [selectedOption, setSelectedOption] = useState<Option | null>(
-    initialValue,
+    initialValue
   );
   const currentPage = useRef(1);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const clearValue: Option = {
-    value: "",
-    label: t("general.none"),
-  };
+  const clearValue: Option = useMemo(
+    () => ({
+      value: "",
+      label: t("general.none"),
+    }),
+    [t]
+  );
 
   const fetchOptions = useCallback(
-    async (page: number = 1, inputValue?: string) => {
+    async (page: number = 1) => {
       if (!apiPath || !session?.user?.access_token) return;
 
       try {
@@ -63,7 +78,7 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
           limit: "20",
           offset: page.toString(),
           ...(dependsOn && state[dependsOn]
-            ? { [dependsOn]: state[dependsOn] }
+            ? { [dependsOn]: state[dependsOn] as string }
             : {}),
         });
 
@@ -74,21 +89,24 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
               "Content-Type": "application/json",
               Authorization: `Bearer ${session.user.access_token}`,
             },
-          },
+          }
         );
 
         const data = await response.json();
-        const newOptions = data.data.map((item: any) => ({
-          label: optionLabel
-            ? Array.isArray(optionLabel)
-              ? `${item[optionLabel[0]]} [${formatCurrency(item[optionLabel[1]])}]`
-              : item[optionLabel]
-            : item.name,
+        const newOptions = data.data.map((item: ApiItem) => ({
+          label:
+            optionLabel && typeof optionLabel === "string"
+              ? String(item[optionLabel])
+              : Array.isArray(optionLabel)
+              ? `${item[optionLabel[0]]} [${formatCurrency(
+                  item[optionLabel[1]] as number
+                )}]`
+              : item.name,
           value: item.id,
         }));
 
         setAllData((prev) =>
-          page === 1 ? [clearValue, ...newOptions] : [...prev, ...newOptions],
+          page === 1 ? [clearValue, ...newOptions] : [...prev, ...newOptions]
         );
         currentPage.current = page;
       } catch (error) {
@@ -97,14 +115,14 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
         setIsLoading(false);
       }
     },
-    [API_URL, apiPath, dependsOn, optionLabel, session, state],
+    [API_URL, apiPath, dependsOn, optionLabel, session, state, clearValue]
   );
 
   useEffect(() => {
     if (status === "authenticated" && !options) {
       fetchOptions(1);
     }
-  }, [status, options]);
+  }, [status, options, fetchOptions]);
 
   useEffect(() => {
     if (dependsOn && state[dependsOn] === undefined) {
@@ -114,7 +132,7 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
       setIsDisabled(false);
       fetchOptions(1);
     }
-  }, [dependsOn, state]);
+  }, [dependsOn, state, clearValue, fetchOptions]);
 
   const handleChange = (option: SingleValue<Option> | MultiValue<Option>) => {
     if (isMulti) {
@@ -146,7 +164,7 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
       isDisabled={isLoading || isDisabled}
       placeholder={placeholder || t("general.select")}
       onMenuScrollToBottom={handleLoadMore}
-      menuPortalTarget={document.body}
+      menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
       styles={customStyles}
     />
   );

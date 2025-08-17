@@ -59,17 +59,17 @@ const Page = () => {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 space-y-2">
             {Object.entries(data).map(([key, value]) => {
-              return (
-                <TextData
-                  key={key}
-                  title={key}
-                  text={
-                    key === "status"
-                      ? t("general." + value.toLowerCase())
-                      : value
-                  }
-                />
-              );
+              let textValue: string | number = t("general.no_available");
+
+              if (key === "status") {
+                textValue = t(`general.${(value as string).toLowerCase()}`);
+              } else if (key === "project") {
+                textValue = (value as { name: string })?.name || t("general.no_available");
+              } else if (typeof value === "string" || typeof value === "number") {
+                textValue = value;
+              }
+
+              return <TextData key={key} title={key} text={textValue} />;
             })}
           </div>
         </>

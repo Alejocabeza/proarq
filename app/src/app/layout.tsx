@@ -3,22 +3,25 @@ import "@app/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
 import { StoreProvider } from "@app/providers/store.provider";
-import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_APP_NAME,
 };
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
   const messages = await getMessages();
+
   return (
-    <html lang={locale}>
+    <html lang="es">
       <body>
         <NextIntlClientProvider messages={messages}>
           <SessionProvider>

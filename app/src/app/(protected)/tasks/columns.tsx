@@ -89,7 +89,7 @@ export const Columns = (): ColumnDef<TaskInterface>[] => {
       header: t("general.status"),
       cell: ({ row }) => (
         <div>
-          {t(`general.${row.getValue("status").toLowerCase()}`) ||
+          {t(`general.${(row.getValue("status") as string).toLowerCase()}`) ||
             t("general.no_available")}
         </div>
       ),
@@ -99,7 +99,7 @@ export const Columns = (): ColumnDef<TaskInterface>[] => {
       header: t("general.project"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {(row.getValue("project") && row.getValue("project").name) ||
+          {((row.getValue("project") as { name: string })?.name) ||
             t("general.no_available")}
         </div>
       ),

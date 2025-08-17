@@ -25,7 +25,11 @@ export default {
 
           return user;
         } catch (error) {
-          throw new Error(error.message || "An unexpected error occurred");
+          let errorMessage = "An unexpected error occurred";
+          if (error instanceof Error) {
+            errorMessage = error.message;
+          }
+          throw new Error(errorMessage);
         }
       },
     }),

@@ -96,9 +96,7 @@ export const Columns = (): ColumnDef<ProviderInterface>[] => {
       header: t("general.address"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {row.getValue("address")
-            ? row.getValue("address").name
-            : t("general.no_available")}
+          {(row.getValue("address") as string) || t("general.no_available")}
         </div>
       ),
     },

@@ -15,6 +15,7 @@ import {
   Control,
   Controller,
   FieldErrors,
+  Path,
   UseFormRegister,
   useFieldArray,
   useWatch,
@@ -68,8 +69,7 @@ export const ActivityItemsForm: React.FC<ActivityItemsFormProps> = ({
   }, [watch]);
 
   const renderInputWithError = (
-    fieldName: string,
-    index: number,
+    fieldName: Path<ActivityInterface>,
     placeholder: string,
     errorMessage?: string
   ) => (
@@ -131,7 +131,6 @@ export const ActivityItemsForm: React.FC<ActivityItemsFormProps> = ({
                     <TableCell>
                       {renderInputWithError(
                         `items.${index}.name`,
-                        index,
                         t("general.name"),
                         fieldErrors?.name?.message
                       )}
@@ -150,7 +149,7 @@ export const ActivityItemsForm: React.FC<ActivityItemsFormProps> = ({
                             initialValue={defaultProvider}
                             placeholder={t("activities.select_provider")}
                             onChange={(option) =>
-                              option.value === null || option === null
+                              option === null || option.value === ""
                                 ? field.onChange(null)
                                 : field.onChange(option.value)
                             }
@@ -176,11 +175,14 @@ export const ActivityItemsForm: React.FC<ActivityItemsFormProps> = ({
                             dependsOn="provider"
                             placeholder={t("activities.select_provider")}
                             onChange={(option) =>
-                              option.value === null || option === null
+                              option === null || option.value === ""
                                 ? field.onChange(null)
                                 : field.onChange(option.value)
                             }
-                            state={items && items[index]}
+                            state={
+                              items &&
+                              (items[index] as unknown as Record<string, unknown>)
+                            }
                           />
                         )}
                       />
@@ -204,7 +206,7 @@ export const ActivityItemsForm: React.FC<ActivityItemsFormProps> = ({
                             initialValue={defaultPrice}
                             placeholder={t("activities.select_price")}
                             onChange={(option) =>
-                              option.value === null || option === null
+                              option === null || option.value === ""
                                 ? field.onChange(null)
                                 : field.onChange(option.value)
                             }
@@ -219,7 +221,6 @@ export const ActivityItemsForm: React.FC<ActivityItemsFormProps> = ({
                     <TableCell>
                       {renderInputWithError(
                         `items.${index}.percentage`,
-                        index,
                         t("general.name"),
                         fieldErrors?.percentage?.message
                       )}

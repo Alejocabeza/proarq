@@ -26,9 +26,13 @@ export const loginAction = async (formValues: LoginInterface) => {
       error: false,
     };
   } catch (error) {
+    let message = "An unexpected error occurred";
+    if (error instanceof Error) {
+      message = error.message;
+    }
     return {
       title: "Login Error",
-      message: error.cause.err.message || "An unexpected error occurred",
+      message,
       error: true,
     };
   }
@@ -51,9 +55,13 @@ export const registerAction = async (formValues: RegisterInterface) => {
       error: false,
     };
   } catch (error) {
+    let message = "An unexpected error occurred";
+    if (error instanceof Error) {
+      message = error.message;
+    }
     return {
       title: "Register Failed",
-      message: error.message,
+      message,
       error: true,
     };
   }
@@ -79,9 +87,13 @@ export const forgotPasswordAction = async ({
       error: false,
     };
   } catch (error) {
+    let message = "An unexpected error occurred";
+    if (error instanceof Error) {
+      message = error.message;
+    }
     return {
       title: "Forgot Password Failed",
-      message: error.message,
+      message,
       error: true,
     };
   }
@@ -107,9 +119,13 @@ export const resetPasswordAction = async (
       error: false,
     };
   } catch (error) {
+    let message = "An unexpected error occurred";
+    if (error instanceof Error) {
+      message = error.message;
+    }
     return {
       title: "Reset Password Failed",
-      message: error.message,
+      message,
       error: true,
     };
   }
@@ -126,9 +142,13 @@ export const logoutAction = async () => {
       error: false,
     };
   } catch (error) {
+    let message = "An unexpected error occurred";
+    if (error instanceof Error) {
+      message = error.message;
+    }
     return {
       title: "Logout Failed",
-      message: error.message,
+      message,
       error: true,
     };
   }

@@ -56,7 +56,7 @@ export const ProviderItemsForm: React.FC<ProviderItemsTableProps> = ({
         append(defaultItem);
       }
     }
-  }, []);
+  }, [action, append, fields.length]);
 
   return (
     <div className="space-y-2">

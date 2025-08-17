@@ -69,12 +69,12 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (!isLoading) {
+    if (data) {
       setValue("client", data.client ? data.client.id : null);
       setValue("branch", data.branch ? data.branch.id : null);
       setValue("address", data.address ? data.address.id : null);
     }
-  }, [isLoading]);
+  }, [data, setValue]);
 
   const onSubmit: SubmitHandler<ProjectInterface> = async (formValues) => {
     const res = await updateData({ id, data: formValues });
@@ -137,7 +137,7 @@ const Page = () => {
                       new Date(
                         data.startDate.split("-")[0],
                         data.startDate.split("-")[1] - 1,
-                        data.startDate.split("-")[2],
+                        data.startDate.split("-")[2]
                       )
                     }
                     onChange={(date) => field.onChange(date)}
@@ -158,7 +158,7 @@ const Page = () => {
                       new Date(
                         data.endDate.split("-")[0],
                         data.endDate.split("-")[1] - 1,
-                        data.endDate.split("-")[2],
+                        data.endDate.split("-")[2]
                       )
                     }
                     onChange={(date) => field.onChange(date)}
@@ -232,7 +232,9 @@ const Page = () => {
                     id="branch"
                     apiPath="/branches"
                     placeholder={t("projects.select_branch")}
-                    onChange={(option) => field.onChange(option.value || null)}
+                    onChange={(option) =>
+                      field.onChange(option ? option.value : null)
+                    }
                   />
                 )}
               />
@@ -258,7 +260,9 @@ const Page = () => {
                     id="client"
                     apiPath="/clients"
                     placeholder={t("projects.select_client")}
-                    onChange={(option) => field.onChange(option.value || null)}
+                    onChange={(option) =>
+                      field.onChange(option ? option.value : null)
+                    }
                   />
                 )}
               />
@@ -284,7 +288,9 @@ const Page = () => {
                     id="address"
                     apiPath="/addresses"
                     placeholder={t("clients.select_address")}
-                    onChange={(option) => field.onChange(option.value || null)}
+                    onChange={(option) =>
+                      field.onChange(option ? option.value : null)
+                    }
                   />
                 )}
               />

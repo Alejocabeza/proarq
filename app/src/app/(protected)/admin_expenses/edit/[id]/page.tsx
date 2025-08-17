@@ -56,11 +56,11 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (!isLoading) {
+    if (data) {
       setValue("name", data.name);
       setValue("value", data.value);
     }
-  }, [isLoading]);
+  }, [data, setValue]);
 
   const onSubmit: SubmitHandler<VatInterface> = async (formValues) => {
     const res = await updateData({ id, data: formValues });

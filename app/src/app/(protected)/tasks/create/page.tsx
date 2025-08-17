@@ -142,7 +142,7 @@ const Page = () => {
                 id="project"
                 apiPath="/projects"
                 placeholder={t("tasks.select_project")}
-                onChange={(option) => field.onChange(option.value || null)}
+                onChange={(option) => field.onChange(option ? option.value : null)}
               />
             )}
           />

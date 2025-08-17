@@ -59,7 +59,7 @@ const Page = () => {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 space-y-2">
             {Object.entries(data).map(([key, value]) => {
-              return <TextData key={key} title={key} text={value} />;
+              return <TextData key={key} title={key} text={value as string} />;
             })}
           </div>
         </>

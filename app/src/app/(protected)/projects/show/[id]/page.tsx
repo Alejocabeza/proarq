@@ -94,8 +94,21 @@ const Page = () => {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 space-y-2">
             {Object.entries(data).map(([key, value]) => {
-              if (key === "typeClient" || key === "tasks") return;
-              return <TextData key={key} title={key} text={value} />;
+              if (key === "typeClient" || key === "tasks") return null;
+
+              let text: string | number = t("general.no_available");
+
+              if (typeof value === "string" || typeof value === "number") {
+                text = value;
+              } else if (
+                typeof value === "object" &&
+                value !== null &&
+                "name" in value
+              ) {
+                text = (value as { name: string }).name;
+              }
+
+              return <TextData key={key} title={key} text={text} />;
             })}
             <div className="space-y-2 col-span-full">
               <TaskTable tasks={data.tasks} />

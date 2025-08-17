@@ -1,10 +1,7 @@
 "use client";
 import { TextData } from "@app/components/text-data";
 import { ButtonPrimary } from "@app/components/ui/button-primary";
-import {
-  useDeleteClientMutation,
-  useFindOneClientQuery,
-} from "@app/services/client.service";
+
 import {
   useDeleteEmployeeMutation,
   useFindOneEmployeeQuery,

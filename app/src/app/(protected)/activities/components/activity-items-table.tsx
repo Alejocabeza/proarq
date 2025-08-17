@@ -47,7 +47,9 @@ export const ActivityItemsTable: React.FC<ActivityItemsTableProps> = ({
                     {formatCurrency(item?.providerItem?.amount, "COP", "es-CO")}
                   </TableCell>
                   <TableCell className="space-y-2 h-16">
-                    {formatCurrency(+item?.price?.amount, "COP", "es-CO")}
+                    {item?.price?.amount
+                      ? formatCurrency(+item.price.amount, "COP", "es-CO")
+                      : t("general.no_available")}
                   </TableCell>
                   <TableCell className="space-y-2 h-16">
                     {item.percentage}%

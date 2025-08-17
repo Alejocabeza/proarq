@@ -1,5 +1,9 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import Link from "next/link";
 import { PropsWithChildren } from "react";
+import Image from "next/image";
 
 const GuestLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -32,10 +36,11 @@ const GuestLayout = ({ children }: PropsWithChildren) => {
         </div>
       </div>
       <div className="relative hidden bg-muted lg:block">
-        <img
+        <Image
           src="/placeholder.svg"
           alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          fill={true}
+          className="object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
     </div>
