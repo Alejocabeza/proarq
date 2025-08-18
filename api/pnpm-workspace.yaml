@@ -1,6 +1,0 @@
-onlyBuiltDependencies:
-  - '@nestjs/core'
-  - bcrypt
-  - esbuild
-  - sharp
-  - sqlite3
