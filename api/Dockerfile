@@ -11,4 +11,4 @@ COPY dist ./dist
 
 EXPOSE 3000
 
-CMD ["pnpm", "start:prod"]
+CMD ["node", "dist/src/main.js"]
