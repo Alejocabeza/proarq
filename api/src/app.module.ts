@@ -22,6 +22,7 @@ import { UtilityExpenseModule } from './utility-expense/utility-expense.module';
 import { SettingModule } from './setting/setting.module';
 import { typeormModuleOptions } from '../typeOrm.config';
 import { RedisModule } from './redis/redis.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { RedisModule } from './redis/redis.module';
     UtilityExpenseModule,
     SettingModule,
     RedisModule,
+    HealthModule,
   ],
 })
 export class AppModule {}
