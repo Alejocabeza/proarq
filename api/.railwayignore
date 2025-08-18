@@ -34,5 +34,4 @@ nest-cli.json
 .prettierrc
 *.md
 coverage
-dist
 pnpm-workspace.yaml
