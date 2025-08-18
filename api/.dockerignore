@@ -6,9 +6,6 @@ README.md
 .env
 .nyc_output
 coverage
-.nyc_output
-.coverage
-coverage
 *.lcov
 test
 tests
@@ -16,5 +13,12 @@ tests
 *.spec.js
 .eslintrc.js
 .prettierrc
-tsconfig.json
-tsconfig.build.json
+*.log
+.DS_Store
+.vscode
+.idea
+coverage
+dist
+build
+.cache
+.parcel-cache
