@@ -12,8 +12,8 @@ echo "Building application..."
 pnpm run build
 
 echo "Verifying build..."
-if [ -d "dist" ] && [ -f "dist/main.js" ]; then
-    echo "Build successful! dist/main.js exists."
+if [ -d "dist" ] && [ -f "dist/src/main.js" ]; then
+    echo "Build successful! dist/src/main.js exists."
     
     echo "Generating minimal package.json for Railway..."
     chmod +x scripts/generate-railway-package.sh
