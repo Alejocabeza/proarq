@@ -1,5 +1,6 @@
 [build]
 builder = "dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "pnpm start:prod"
@@ -9,6 +10,3 @@ restartPolicyType = "on_failure"
 
 [build.args]
 NODE_ENV = "production"
-
-[build.preBuildCommand]
-cmd = "chmod +x scripts/prepare-railway.sh && ./scripts/prepare-railway.sh"
