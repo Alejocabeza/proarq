@@ -26,13 +26,21 @@ export const loginAction = async (formValues: LoginInterface) => {
       error: false,
     };
   } catch (error) {
-    let message = "An unexpected error occurred";
-    if (error instanceof Error) {
-      message = error.message;
-    }
+    const errorMessage =
+      error instanceof Error &&
+      error.cause &&
+      typeof error.cause === "object" &&
+      "err" in error.cause &&
+      error.cause.err &&
+      typeof error.cause.err === "object" &&
+      "message" in error.cause.err &&
+      typeof error.cause.err.message === "string"
+        ? error.cause.err.message
+        : "An unexpected error occurred";
+
     return {
       title: "Login Error",
-      message,
+      message: errorMessage,
       error: true,
     };
   }
@@ -55,13 +63,11 @@ export const registerAction = async (formValues: RegisterInterface) => {
       error: false,
     };
   } catch (error) {
-    let message = "An unexpected error occurred";
-    if (error instanceof Error) {
-      message = error.message;
-    }
+    const errorMessage =
+      error instanceof Error ? error.message : "An unexpected error occurred";
     return {
       title: "Register Failed",
-      message,
+      message: errorMessage,
       error: true,
     };
   }
@@ -87,13 +93,11 @@ export const forgotPasswordAction = async ({
       error: false,
     };
   } catch (error) {
-    let message = "An unexpected error occurred";
-    if (error instanceof Error) {
-      message = error.message;
-    }
+    const errorMessage =
+      error instanceof Error ? error.message : "An unexpected error occurred";
     return {
       title: "Forgot Password Failed",
-      message,
+      message: errorMessage,
       error: true,
     };
   }
@@ -119,13 +123,11 @@ export const resetPasswordAction = async (
       error: false,
     };
   } catch (error) {
-    let message = "An unexpected error occurred";
-    if (error instanceof Error) {
-      message = error.message;
-    }
+    const errorMessage =
+      error instanceof Error ? error.message : "An unexpected error occurred";
     return {
       title: "Reset Password Failed",
-      message,
+      message: errorMessage,
       error: true,
     };
   }
@@ -134,7 +136,7 @@ export const resetPasswordAction = async (
 export const logoutAction = async () => {
   try {
     await signOut({
-      redirect: false
+      redirect: false,
     });
     return {
       title: "Logout Successfully",
@@ -142,13 +144,11 @@ export const logoutAction = async () => {
       error: false,
     };
   } catch (error) {
-    let message = "An unexpected error occurred";
-    if (error instanceof Error) {
-      message = error.message;
-    }
+    const errorMessage =
+      error instanceof Error ? error.message : "An unexpected error occurred";
     return {
       title: "Logout Failed",
-      message,
+      message: errorMessage,
       error: true,
     };
   }

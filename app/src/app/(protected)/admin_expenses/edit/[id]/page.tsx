@@ -5,7 +5,6 @@ import { Input } from "@app/components/ui/input";
 import { InputError } from "@app/components/ui/input-error";
 import { Label } from "@app/components/ui/label";
 import { AdminExpenseInterface } from "@app/intefaces/admin-expenses.interface";
-import { VatInterface } from "@app/intefaces/vat.interface";
 import { adminExpensesSchema } from "@app/schemas/admin-expenses.schema";
 import {
   useDeleteAdminExpensesMutation,
@@ -45,24 +44,24 @@ const Page = () => {
     const res = await deleteData(id);
     if (res.data.statusCode !== 200) {
       toast.error(res.data.message, {
-        description: "Vat Delete Failed",
+        description: "Admin Expense Delete Failed",
       });
       return;
     }
     toast.success(res.data.message, {
-      description: "Vat Delete Successfully",
+      description: "Admin Expense Delete Successfully",
     });
-    router.push("/vats");
+    router.push("/admin_expenses");
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue("name", data.name);
       setValue("value", data.value);
     }
-  }, [data, setValue]);
+  }, [isLoading, data.name, data.value, setValue]);
 
-  const onSubmit: SubmitHandler<VatInterface> = async (formValues) => {
+  const onSubmit: SubmitHandler<AdminExpenseInterface> = async (formValues) => {
     const res = await updateData({ id, data: formValues });
     if (res.data.statusCode !== 200) {
       toast.error(res.data.message, {

@@ -10,11 +10,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.user = user;
-        token.accessToken = user.access_token;
-        token.refreshToken = user.refresh_token;
-        token.expiresIn = user.expires_in;
+        token.accessToken = (
+          user as {
+            access_token: string;
+            refresh_token: string;
+            expires_in: number;
+          }
+        ).access_token;
+        token.refreshToken = (
+          user as {
+            access_token: string;
+            refresh_token: string;
+            expires_in: number;
+          }
+        ).refresh_token;
+        token.expiresIn = (
+          user as {
+            access_token: string;
+            refresh_token: string;
+            expires_in: number;
+          }
+        ).expires_in;
       }
-      const isExpired = (token.expiresIn as number) && Date.now() > (token.expiresIn as number) * 1000;
+      const isExpired =
+        token.expiresIn &&
+        typeof token.expiresIn === "number" &&
+        Date.now() > token.expiresIn * 1000;
       if (isExpired) {
         return null;
       }

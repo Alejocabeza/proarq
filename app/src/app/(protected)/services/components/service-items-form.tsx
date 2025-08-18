@@ -22,7 +22,10 @@ import { CirclePlus, Trash } from "lucide-react";
 import { Button } from "@app/components/ui/button";
 import { InputError } from "@app/components/ui/input-error";
 import { SelectLoader } from "@app/components/select-loader";
-import { ServiceInterface, ServiceItemsInterface } from "@app/intefaces/service.interface";
+import {
+  ServiceInterface,
+  ServiceItemsInterface,
+} from "@app/intefaces/service.interface";
 import { Input } from "@app/components/ui/input";
 import { useSession } from "next-auth/react";
 
@@ -32,7 +35,7 @@ interface ServiceItemsFormProps {
   errors: FieldErrors<ServiceInterface>;
   action?: "create" | "update";
   data?: ServiceItemsInterface[];
-  setValue: UseFormSetValue<ServiceInterface>
+  setValue: UseFormSetValue<ServiceInterface>;
 }
 
 const defaultItem: ServiceItemsInterface = {
@@ -57,7 +60,7 @@ export const ServiceItemsForm: React.FC<ServiceItemsFormProps> = ({
 
   const handleFetchActivity = async (
     activity: string | null,
-    index: number,
+    index: number
   ) => {
     try {
       if (!activity) {
@@ -71,7 +74,7 @@ export const ServiceItemsForm: React.FC<ServiceItemsFormProps> = ({
               "Content-Type": "application/json",
               Authorization: `Bearer ${session?.user.access_token}`,
             },
-          },
+          }
         );
         const data = await response.json();
 

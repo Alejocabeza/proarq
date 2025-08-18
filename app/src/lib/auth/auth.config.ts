@@ -15,7 +15,7 @@ export default {
                 password,
               }),
               headers: { "Content-Type": "application/json" },
-            },
+            }
           );
           const user = await res.json();
 
@@ -25,10 +25,10 @@ export default {
 
           return user;
         } catch (error) {
-          let errorMessage = "An unexpected error occurred";
-          if (error instanceof Error) {
-            errorMessage = error.message;
-          }
+          const errorMessage =
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred";
           throw new Error(errorMessage);
         }
       },

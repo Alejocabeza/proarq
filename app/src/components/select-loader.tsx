@@ -30,12 +30,6 @@ interface SelectLoaderProps {
   state?: Record<string, unknown>;
 }
 
-type ApiItem = {
-  id: string;
-  name: string;
-  [key: string]: string | number;
-};
-
 export const SelectLoader: React.FC<SelectLoaderProps> = ({
   id,
   apiPath,
@@ -60,7 +54,7 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
   const currentPage = useRef(1);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const clearValue: Option = useMemo(
+  const clearValue = useMemo<Option>(
     () => ({
       value: "",
       label: t("general.none"),
@@ -78,7 +72,7 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
           limit: "20",
           offset: page.toString(),
           ...(dependsOn && state[dependsOn]
-            ? { [dependsOn]: state[dependsOn] as string }
+            ? { [dependsOn]: state[dependsOn] }
             : {}),
         });
 
@@ -93,16 +87,15 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
         );
 
         const data = await response.json();
-        const newOptions = data.data.map((item: ApiItem) => ({
-          label:
-            optionLabel && typeof optionLabel === "string"
-              ? String(item[optionLabel])
-              : Array.isArray(optionLabel)
+        const newOptions = data.data.map((item: Record<string, unknown>) => ({
+          label: optionLabel
+            ? Array.isArray(optionLabel)
               ? `${item[optionLabel[0]]} [${formatCurrency(
-                  item[optionLabel[1]] as number
+                  Number(item[optionLabel[1]])
                 )}]`
-              : item.name,
-          value: item.id,
+              : (item[optionLabel] as string)
+            : (item.name as string),
+          value: item.id as string,
         }));
 
         setAllData((prev) =>
@@ -164,7 +157,9 @@ export const SelectLoader: React.FC<SelectLoaderProps> = ({
       isDisabled={isLoading || isDisabled}
       placeholder={placeholder || t("general.select")}
       onMenuScrollToBottom={handleLoadMore}
-      menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
+      menuPortalTarget={
+        typeof document !== "undefined" ? document.body : undefined
+      }
       styles={customStyles}
     />
   );

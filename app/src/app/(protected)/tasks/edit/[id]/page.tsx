@@ -67,11 +67,11 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue("project", data.project ? data.project.id : null);
       setValue("description", data.description);
     }
-  }, [data, setValue]);
+  }, [isLoading, data.project, data.description, setValue]);
 
   const onSubmit: SubmitHandler<TaskInterface> = async (formValues) => {
     const res = await updateData({ id, data: formValues });
@@ -134,7 +134,7 @@ const Page = () => {
                       new Date(
                         data.startDate.split("-")[0],
                         data.startDate.split("-")[1] - 1,
-                        data.startDate.split("-")[2],
+                        data.startDate.split("-")[2]
                       )
                     }
                     onChange={(date) => field.onChange(date)}
@@ -155,7 +155,7 @@ const Page = () => {
                       new Date(
                         data.endDate.split("-")[0],
                         data.endDate.split("-")[1] - 1,
-                        data.endDate.split("-")[2],
+                        data.endDate.split("-")[2]
                       )
                     }
                     onChange={(date) => field.onChange(date)}
@@ -210,7 +210,7 @@ const Page = () => {
                     id="project"
                     apiPath="/projects"
                     placeholder={t("tasks.select_project")}
-                    onChange={(option) => field.onChange(option ? option.value : null)}
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />

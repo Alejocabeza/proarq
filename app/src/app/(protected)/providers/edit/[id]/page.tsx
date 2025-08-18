@@ -152,7 +152,7 @@ const Page = () => {
                         : { value: null, label: t("general.none") }
                     }
                     placeholder={t("clients.select_address")}
-                    onChange={(option) => field.onChange(option ? option.value : null)}
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />

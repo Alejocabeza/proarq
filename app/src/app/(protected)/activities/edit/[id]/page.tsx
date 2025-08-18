@@ -72,18 +72,18 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue(
         "items",
         data.items.map((item: ActivityItemsInterface) => ({
           ...item,
           provider: item?.provider?.id,
           providerItem: item?.providerItem?.id,
-          price: item.price?.id,
-        })),
+          price: item.price?.id || null,
+        }))
       );
     }
-  }, [data, setValue]);
+  }, [isLoading, data.items, setValue]);
 
   return (
     <>

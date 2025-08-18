@@ -119,7 +119,7 @@ export const Columns = (): ColumnDef<ProjectInterface>[] => {
       header: t("general.client"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {((row.getValue("client") as { name: string })?.name) ||
+          {(row.getValue("client") as { name: string } | null)?.name ||
             t("general.no_available")}
         </div>
       ),
@@ -129,7 +129,7 @@ export const Columns = (): ColumnDef<ProjectInterface>[] => {
       header: t("general.branch"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {((row.getValue("branch") as { name: string })?.name) ||
+          {(row.getValue("branch") as { name: string } | null)?.name ||
             t("general.no_available")}
         </div>
       ),
@@ -139,7 +139,7 @@ export const Columns = (): ColumnDef<ProjectInterface>[] => {
       header: t("general.address"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {((row.getValue("address") as { name: string })?.name) ||
+          {(row.getValue("address") as { name: string } | null)?.name ||
             t("general.no_available")}
         </div>
       ),

@@ -2,7 +2,9 @@ import React, { FC, HTMLAttributes } from "react";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@app/lib/utils";
 
-export const TextareaInput: FC<HTMLAttributes<HTMLTextAreaElement>> = ({
+type TextareaInputProps = HTMLAttributes<HTMLTextAreaElement>;
+
+export const TextareaInput: FC<TextareaInputProps> = ({
   className,
   ...props
 }) => {

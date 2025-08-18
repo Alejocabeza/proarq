@@ -74,7 +74,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue("unit", data.unit);
       setValue(
         "serviceCategory",
@@ -90,7 +90,7 @@ const Page = () => {
         }))
       );
     }
-  }, [data, setValue]);
+  }, [isLoading, data.unit, data.serviceCategory, data.items, setValue]);
 
   return (
     <>
@@ -146,9 +146,7 @@ const Page = () => {
                       { value: UnitEnum.GBL, label: UnitEnum.GBL },
                       { value: UnitEnum.UND, label: UnitEnum.UND },
                     ]}
-                    onChange={(option) =>
-                      field.onChange(option ? option.value : null)
-                    }
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />
@@ -187,9 +185,7 @@ const Page = () => {
                     id="serviceCategory"
                     apiPath="/service_categories"
                     placeholder={t("clients.select_address")}
-                    onChange={(option) =>
-                      field.onChange(option ? option.value : null)
-                    }
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />

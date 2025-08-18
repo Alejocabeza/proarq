@@ -55,14 +55,14 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue("name", data.name);
       setValue("value", data.value);
     }
-  }, [data, setValue]);
+  }, [isLoading, data.name, data.value, setValue]);
 
   const onSubmit: SubmitHandler<UtilityExpenseInterface> = async (
-    formValues,
+    formValues
   ) => {
     const res = await updateData({ id, data: formValues });
     if (res.data.statusCode !== 200) {

@@ -1,9 +1,6 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 import Link from "next/link";
-import { PropsWithChildren } from "react";
 import Image from "next/image";
+import { PropsWithChildren } from "react";
 
 const GuestLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -39,7 +36,7 @@ const GuestLayout = ({ children }: PropsWithChildren) => {
         <Image
           src="/placeholder.svg"
           alt="Image"
-          fill={true}
+          fill
           className="object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>

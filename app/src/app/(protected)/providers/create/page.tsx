@@ -102,7 +102,7 @@ const Page = () => {
                 id="address"
                 apiPath="/addresses"
                 placeholder={t("clients.select_address")}
-                onChange={(option) => field.onChange(option ? option.value : null)}
+                onChange={(option) => field.onChange(option?.value || null)}
               />
             )}
           />

@@ -69,12 +69,12 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue("client", data.client ? data.client.id : null);
       setValue("branch", data.branch ? data.branch.id : null);
       setValue("address", data.address ? data.address.id : null);
     }
-  }, [data, setValue]);
+  }, [isLoading, data.client, data.branch, data.address, setValue]);
 
   const onSubmit: SubmitHandler<ProjectInterface> = async (formValues) => {
     const res = await updateData({ id, data: formValues });
@@ -232,9 +232,7 @@ const Page = () => {
                     id="branch"
                     apiPath="/branches"
                     placeholder={t("projects.select_branch")}
-                    onChange={(option) =>
-                      field.onChange(option ? option.value : null)
-                    }
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />
@@ -260,9 +258,7 @@ const Page = () => {
                     id="client"
                     apiPath="/clients"
                     placeholder={t("projects.select_client")}
-                    onChange={(option) =>
-                      field.onChange(option ? option.value : null)
-                    }
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />
@@ -288,9 +284,7 @@ const Page = () => {
                     id="address"
                     apiPath="/addresses"
                     placeholder={t("clients.select_address")}
-                    onChange={(option) =>
-                      field.onChange(option ? option.value : null)
-                    }
+                    onChange={(option) => field.onChange(option?.value || null)}
                   />
                 )}
               />

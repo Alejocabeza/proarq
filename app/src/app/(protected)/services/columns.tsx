@@ -89,7 +89,8 @@ export const Columns = (): ColumnDef<ServiceInterface>[] => {
       header: t("general.serviceCategory"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {(row.getValue("serviceCategory") as string) || t("general.no_available")}
+          {(row.getValue("serviceCategory") as { name: string } | null)?.name ||
+            t("general.no_available")}
         </div>
       ),
     },

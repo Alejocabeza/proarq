@@ -5,7 +5,6 @@ import { Input } from "@app/components/ui/input";
 import { InputError } from "@app/components/ui/input-error";
 import { Label } from "@app/components/ui/label";
 import { ContingencyExpenseInterface } from "@app/intefaces/contingency-expenses.interface";
-import { VatInterface } from "@app/intefaces/vat.interface";
 import { contingencyExpensesUpdateSchema } from "@app/schemas/contingency-expenses.schema";
 import {
   useDeleteContingencyExpensesMutation,
@@ -56,13 +55,15 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (!isLoading) {
       setValue("name", data.name);
       setValue("value", data.value);
     }
-  }, [data, setValue]);
+  }, [isLoading, data.name, data.value, setValue]);
 
-  const onSubmit: SubmitHandler<VatInterface> = async (formValues) => {
+  const onSubmit: SubmitHandler<ContingencyExpenseInterface> = async (
+    formValues
+  ) => {
     const res = await updateData({ id, data: formValues });
     if (res.data.statusCode !== 200) {
       toast.error(res.data.message, {

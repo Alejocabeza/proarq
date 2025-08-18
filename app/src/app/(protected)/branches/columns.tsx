@@ -98,7 +98,8 @@ export const Columns = (): ColumnDef<BranchInterface>[] => {
       header: t("general.address"),
       cell: ({ row }) => (
         <div className="capitalize">
-          {(row.getValue("address") as string) || t("general.no_available")}
+          {(row.getValue("address") as { name: string } | null)?.name ||
+            t("general.no_available")}
         </div>
       ),
     },
