@@ -23,11 +23,11 @@ chmod +x scripts/prepare-railway.sh
 ls -la dist/
 ```
 
-### 3. Hacer commit de los archivos compilados
+### 3. Hacer commit de los archivos necesarios
 
 ```bash
-git add dist/
-git commit -m "feat: add compiled dist for Railway deployment"
+git add dist/ package-railway.json Dockerfile
+git commit -m "feat: add compiled dist and minimal files for Railway deployment"
 git push
 ```
 

@@ -2,10 +2,10 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package-railway.json ./package.json
 
 RUN npm install -g pnpm && \
-    pnpm install --frozen-lockfile --prod
+    pnpm install --prod
 
 COPY dist ./dist
 
