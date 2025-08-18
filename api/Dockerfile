@@ -2,13 +2,13 @@ FROM node:18-alpine AS base
 
 WORKDIR /app
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm --no-optional --no-audit --no-fund
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY tsconfig.json tsconfig.build.json ./
 COPY nest-cli.json ./
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --no-optional --no-audit
 
 COPY . .
 
