@@ -2,7 +2,7 @@
 
 import { execSync } from 'child_process';
 
-const command = 'pnpm typeorm migration:run -d ./typeOrm.config.ts';
+const command = 'npx typeorm migration:run -d ./typeOrm.config.ts';
 
 console.log(`Ejecutando: ${command}`);
 

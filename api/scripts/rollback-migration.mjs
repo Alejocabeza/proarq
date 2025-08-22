@@ -2,7 +2,7 @@
 
 import { execSync } from 'child_process';
 
-const command = 'pnpm typeorm migration:revert -d ./typeOrm.config.ts';
+const command = 'npx typeorm migration:revert -d ./typeOrm.config.ts';
 
 console.log(`Ejecutando: ${command}`);
 

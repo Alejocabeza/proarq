@@ -9,7 +9,7 @@ if (!migrationName) {
   process.exit(1);
 }
 
-const command = `pnpm typeorm migration:generate ./migrations/${migrationName} -d ./typeOrm.config.ts`;
+const command = `npx typeorm migration:generate ./migrations/${migrationName} -d ./typeOrm.config.ts`;
 
 console.log(`Ejecutando: ${command}`);
 
