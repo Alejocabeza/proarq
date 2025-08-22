@@ -22,8 +22,7 @@
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "migration:generate": "node ./scripts/generate-migration.mjs",
     "migration:run": "node ./scripts/run-migration.mjs",
-    "migration:rollback": "node ./scripts/rollback-migration.mjs",
-    "postinstall": "npm run migration:run"
+    "migration:rollback": "node ./scripts/rollback-migration.mjs"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^3.0.1",
