@@ -23,6 +23,7 @@
     "migration:generate": "node ./scripts/generate-migration.mjs",
     "migration:run": "node ./scripts/run-migration.mjs",
     "migration:rollback": "node ./scripts/rollback-migration.mjs"
+    "postinstall": "npm run migrate:run"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^3.0.1",
