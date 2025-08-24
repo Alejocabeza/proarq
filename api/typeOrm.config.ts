@@ -18,7 +18,7 @@ export const typeormModuleOptions: TypeOrmModuleOptions = isProduction
     }
   : {
       type: 'sqlite',
-      database: process.env.DB_URL,
+      database: 'db.sqlite',
       entities: [join(__dirname, 'src/**/*.entity{.ts,.js}')],
       migrations: [join(__dirname, 'migrations/*{.ts,.js}')],
       synchronize: false,

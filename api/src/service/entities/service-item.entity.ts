@@ -13,8 +13,8 @@ import { User } from '../../auth/entities/user.entity';
 
 @Entity('service_items')
 export class ServiceItem {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('decimal', { precision: 10, scale: 2, name: 'united_price' })
   unitedPrice: number;

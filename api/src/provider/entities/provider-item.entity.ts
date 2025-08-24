@@ -14,8 +14,8 @@ import { ActivityItem } from '../../activity/entities/activity-items.entity';
 
 @Entity('provider_items')
 export class ProviderItem {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;

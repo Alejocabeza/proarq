@@ -14,8 +14,8 @@ import { User } from '../../auth/entities/user.entity';
 
 @Entity('settings')
 export class Setting {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { default: LocaleEnum.ES })
   locale: LocaleEnum;

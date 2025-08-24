@@ -15,8 +15,8 @@ import { User } from '../../auth/entities/user.entity';
 
 @Entity('services')
 export class Service {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;

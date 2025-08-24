@@ -14,8 +14,8 @@ import { ServiceItem } from '../../service/entities/service-item.entity';
 
 @Entity('activities')
 export class Activity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;

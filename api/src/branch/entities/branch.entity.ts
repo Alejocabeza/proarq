@@ -14,8 +14,8 @@ import {
 
 @Entity('branches')
 export class Branch {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;

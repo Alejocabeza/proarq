@@ -6,6 +6,7 @@
 ./supabase
 /db
 /database
+/db.sqlite
 
 # Logs
 logs

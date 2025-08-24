@@ -13,8 +13,8 @@ import { User } from '../../auth/entities/user.entity';
 
 @Entity('tasks')
 export class Task {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;

@@ -17,8 +17,8 @@ import { Task } from '../../task/entities/task.entity';
 
 @Entity('projects')
 export class Project {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;

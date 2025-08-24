@@ -16,8 +16,8 @@ import {
 
 @Entity('addresses')
 export class Address {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 100 })
   name: string;
@@ -41,31 +41,31 @@ export class Address {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: string;
+  user: User;
 
   @OneToMany(() => Client, (client) => client.address, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  client: string;
+  client: Client;
 
   @OneToMany(() => Branch, (branch) => branch.address, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  branch: string;
+  branch: Branch;
 
   @OneToMany(() => Project, (project) => project.address, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  project: string;
+  project: Project;
 
   @OneToMany(() => Provider, (provider) => provider.address, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  provider: string;
+  provider: Provider;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
