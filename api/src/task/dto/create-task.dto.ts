@@ -1,6 +1,7 @@
 import {
   IsDateString,
   IsEnum,
+  IsNumber,
   IsOptional,
   IsString,
   IsUUID,
@@ -24,8 +25,7 @@ export class CreateTaskDto {
   @IsOptional()
   endDate: string;
 
-  @IsString()
-  @IsUUID()
+  @IsNumber()
   project: Project;
 
   @IsEnum(StatusEnum)

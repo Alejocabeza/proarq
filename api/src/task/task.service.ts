@@ -79,7 +79,7 @@ export class TaskService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     try {
       const task = await this.taskRepository.findOne({
         where: { id },
@@ -91,7 +91,7 @@ export class TaskService {
     }
   }
 
-  async update(id: string, updateTaskDto: UpdateTaskDto) {
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
     try {
       await this.taskRepository.update(id, updateTaskDto);
       return {
@@ -103,7 +103,7 @@ export class TaskService {
     }
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     try {
       await this.taskRepository.softDelete(id);
       return {

@@ -3,9 +3,8 @@ import { IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class createServiceItemDto {
   @IsOptional()
-  @IsUUID()
-  @IsString()
-  id: string;
+  @IsNumber()
+  id: number;
 
   @IsNumber()
   unitedPrice: number;
@@ -13,6 +12,6 @@ export class createServiceItemDto {
   @IsNumber()
   percentage: number;
 
-  @IsUUID()
+  @IsNumber()
   activity: Activity;
 }

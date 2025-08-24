@@ -72,7 +72,7 @@ export class ServiceService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     try {
       const service = await this.serviceRepository.findOne({
         where: { id },
@@ -83,7 +83,7 @@ export class ServiceService {
     }
   }
 
-  async update(id: string, updateServiceDto: UpdateServiceDto, user: User) {
+  async update(id: number, updateServiceDto: UpdateServiceDto, user: User) {
     try {
       const { items, ...rest } = updateServiceDto;
 
@@ -132,9 +132,9 @@ export class ServiceService {
     }
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     try {
-      await this.serviceItemRepository.softDelete(id);
+      await this.serviceRepository.softDelete(id);
       return {
         message: 'Service deleted successfully',
         statusCode: 200,

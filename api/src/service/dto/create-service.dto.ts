@@ -22,7 +22,7 @@ export class CreateServiceDto {
   @IsNumber()
   quantity: number;
 
-  @IsUUID()
+  @IsNumber()
   serviceCategory: ServiceCategory;
 
   @IsArray()

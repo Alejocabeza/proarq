@@ -55,7 +55,7 @@ export class VatsService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     try {
       const vat = await this.vatRepository.findOne({
         where: { id },
@@ -66,7 +66,7 @@ export class VatsService {
     }
   }
 
-  async update(id: string, updateVatDto: UpdateVatDto) {
+  async update(id: number, updateVatDto: UpdateVatDto) {
     try {
       await this.vatRepository.update(id, updateVatDto);
       return {
@@ -78,7 +78,7 @@ export class VatsService {
     }
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     try {
       await this.vatRepository.softDelete(id);
       return {
